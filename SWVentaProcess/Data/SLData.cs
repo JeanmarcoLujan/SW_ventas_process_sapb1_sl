@@ -54,5 +54,30 @@ namespace SWVentaProcess.Data
 
             return (HttpWebResponse)httpWebRequest.GetResponse();
         }
+
+
+        public static HttpWebResponse GetInfo(string obj, string route)
+        {
+            var httpWebGetRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["ip_route"].ToString() + route);
+            httpWebGetRequest.ContentType = "application/json";
+            httpWebGetRequest.Method = "POST";
+            httpWebGetRequest.KeepAlive = true;
+            httpWebGetRequest.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            httpWebGetRequest.Headers.Add("B1S-WCFCompatible", "true");
+            httpWebGetRequest.Headers.Add("B1S-MetadataWithoutSession", "true");
+            httpWebGetRequest.Accept = "*/*";
+            httpWebGetRequest.ServicePoint.Expect100Continue = false;
+            httpWebGetRequest.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+            httpWebGetRequest.AutomaticDecompression = DecompressionMethods.GZip;
+            CookieContainer cookies = new CookieContainer();
+            cookies.Add(new Cookie("B1SESSION", obj.ToString()) { Domain = ConfigurationManager.AppSettings["ip_value"].ToString() });
+            cookies.Add(new Cookie("ROUTEID", ".node1") { Domain = ConfigurationManager.AppSettings["ip_value"].ToString() });
+            httpWebGetRequest.CookieContainer = cookies;
+
+            //using (var streamWriter = new StreamWriter(httpWebGetRequest.GetRequestStream()))
+            //{ streamWriter.Write(document); }
+
+            return (HttpWebResponse)httpWebGetRequest.GetResponse();
+        }
     }
 }

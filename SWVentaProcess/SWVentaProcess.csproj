@@ -51,11 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\SLData.cs" />
+    <Compile Include="Helpers\DeliveryHelper.cs" />
     <Compile Include="Models\B1Session.cs" />
-    <Compile Include="Models\Document.cs" />
-    <Compile Include="Models\DocumentBatch.cs" />
-    <Compile Include="Models\DocumentDetail.cs" />
+    <Compile Include="Models\DocumentModel\Document.cs" />
+    <Compile Include="Models\DocumentModel\DocumentBatch.cs" />
+    <Compile Include="Models\DocumentModel\DocumentDetail.cs" />
     <Compile Include="Models\ErrorSL.cs" />
+    <Compile Include="Models\OrderModel\Order.cs" />
+    <Compile Include="Models\OrderModel\OrderDetail.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -83,6 +86,8 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\PaymentModel\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

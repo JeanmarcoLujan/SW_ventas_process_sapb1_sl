@@ -1,4 +1,6 @@
-﻿using SWVentaProcess.Services;
+﻿using SWVentaProcess.Models;
+using SWVentaProcess.Models.OrderModel;
+using SWVentaProcess.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,7 +47,21 @@ namespace SWVentaProcess
                 try
                 {
                     VentaService ventaService = new VentaService();
+                    //Login
                     string token = ventaService.Login();
+
+                    //Obtener ordenes
+                    List<Order> orders = ventaService.getOrders(token);
+
+                    //Generar entregas, factura y pago
+                    foreach (var doc in orders)
+                    {
+
+                    }
+
+                   
+
+
 
 
                     WriteToFile(DateTime.Now + ": " + "ASDF");

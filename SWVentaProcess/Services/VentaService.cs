@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SWVentaProcess.Data;
 using SWVentaProcess.Models;
+using SWVentaProcess.Models.OrderModel;
 using SWVentaProcess.Services.contracts;
 using System;
 using System.Collections.Generic;
@@ -116,9 +117,25 @@ namespace SWVentaProcess.Services
             return documentResult;
         }
 
-        public List<Document> getDocuments(string token)
+        public List<Order> getOrders(string token)
         {
-            throw new NotImplementedException();
+            List<Order> documentResult = new List<Order>();
+            try
+            {
+                using (var streamReader = new StreamReader(SLData.GetInfo(token, "Orders(13584)").GetResponseStream()))
+                {
+                    string result = streamReader.ReadToEnd();
+                    documentResult = JsonConvert.DeserializeObject<List<Order>>(result);
+                }
+            }
+            catch (WebException e)
+            {
+                ErrorSL errorMessage = null;
+                documentResult = null;
+            }
+
+
+            return documentResult;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SWVentaProcess.Models;
+using SWVentaProcess.Models.OrderModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,9 @@ namespace SWVentaProcess.Services.contracts
     interface IVentaService
     {
         string Login();
-        List<Document> getDocuments(string token);
+        List<Order> getOrders(string token);
         Response createDelivery(string token, string document);
-
         Response createInvoice(string token, string document);
-
         Response createPayment(string token, string document);
     }
 }
