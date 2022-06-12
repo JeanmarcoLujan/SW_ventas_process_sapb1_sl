@@ -16,6 +16,7 @@ namespace SWVentaProcess.Models.OrderModel
         public string CostingCode { get; set; }
         public string CostingCode2 { get; set; }
         public string CostingCode3 { get; set; }
+        public string CostingCode4 { get; set; }
         public string CostingCode5 { get; set; }
         public string TaxCode { get; set; }
     }

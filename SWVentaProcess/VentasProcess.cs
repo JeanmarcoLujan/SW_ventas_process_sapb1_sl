@@ -1,4 +1,5 @@
-﻿using SWVentaProcess.Models;
+﻿using SWVentaProcess.Helpers;
+using SWVentaProcess.Models;
 using SWVentaProcess.Models.OrderModel;
 using SWVentaProcess.Services;
 using System;
@@ -56,6 +57,13 @@ namespace SWVentaProcess
                     //Generar entregas, factura y pago
                     foreach (var doc in orders)
                     {
+                        //create delivery
+                        Response resDelivery = ventaService.createDelivery(token, DeliveryHelper.DeliveryGenerateTrama(doc));
+
+                        //create invoice
+                        Response resInvoice = ventaService.createDelivery(token, InvoiceHelper.InvoiceGenerateTrama(doc, int.Parse(resDelivery.DocEntry)));
+
+                        //create payment
 
                     }
 
