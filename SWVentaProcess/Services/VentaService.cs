@@ -38,7 +38,6 @@ namespace SWVentaProcess.Services
             return obj.SessionId.ToString();
         }
 
-
         public Response createDelivery(string token, string document)
         {
             Response documentResult = new Response();
@@ -115,6 +114,11 @@ namespace SWVentaProcess.Services
 
 
             return documentResult;
+        }
+
+        public List<Document> getDocuments(string token)
+        {
+            throw new NotImplementedException();
         }
     }
 }

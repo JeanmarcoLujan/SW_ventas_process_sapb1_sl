@@ -10,6 +10,7 @@ namespace SWVentaProcess.Services.contracts
     interface IVentaService
     {
         string Login();
+        List<Document> getDocuments(string token);
         Response createDelivery(string token, string document);
 
         Response createInvoice(string token, string document);
