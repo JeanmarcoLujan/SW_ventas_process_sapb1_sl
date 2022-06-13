@@ -64,6 +64,7 @@ namespace SWVentaProcess
                         Response resInvoice = ventaService.createDelivery(token, InvoiceHelper.InvoiceGenerateTrama(doc, int.Parse(resDelivery.DocEntry)));
 
                         //create payment
+                        Response resPayment = ventaService.createPayment(token, PaymentHelper.PaymentGenerateTrama(doc, resInvoice));
 
                     }
 
