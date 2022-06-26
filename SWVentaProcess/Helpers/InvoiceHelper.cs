@@ -49,7 +49,7 @@ namespace SWVentaProcess.Helpers
             {
                 DocumentDetail dt = new DocumentDetail();
                 dt.ItemCode = det.ItemCode;
-                dt.Quantity = det.Price;
+                dt.Quantity = det.Quantity;
                 dt.WarehouseCode = det.WarehouseCode;
                 dt.CostingCode = det.CostingCode;
                 dt.CostingCode2 = det.CostingCode2;
@@ -57,7 +57,7 @@ namespace SWVentaProcess.Helpers
                 dt.CostingCode4 = det.CostingCode4;
                 dt.CostingCode5 = det.CostingCode5;
                 dt.TaxCode = det.TaxCode;
-                dt.BaseType = 17;
+                dt.BaseType = 15;
                 dt.BaseEntry = docEntryBase;
                 dt.BaseLine = det.LineNum;
 

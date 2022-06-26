@@ -10,6 +10,7 @@ namespace SWVentaProcess.Models
     {
         public string BatchNumber { get; set; }
         public double Quantity { get; set; }
-        public string ItemCode { get; set; }
+        public int BaseLineNumber { get; set; }
+
     }
 }

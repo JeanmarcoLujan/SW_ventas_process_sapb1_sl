@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWVentaProcess.Models.OrderModel
 {
-    class OrderDetail
+    public class OrderDetail
     {
         public int LineNum { get; set; }
         public string ItemCode { get; set; }

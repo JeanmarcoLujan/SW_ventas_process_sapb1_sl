@@ -37,7 +37,7 @@ namespace SWVentaProcess.Helpers
                 paymentInvoice.SumApplied = 0.0;
                 paymentInvoice.AppliedFC = double.Parse(responseInvoice.DocTotal.ToString());
             }
-            paymentInvoice.AppliedFC = 0.0;
+            //paymentInvoice.AppliedFC = 0.0;
             paymentInvoice.InvoiceType = "it_Invoice";
             paymentInvoice.InstallmentId = 1;
 
@@ -47,9 +47,11 @@ namespace SWVentaProcess.Helpers
 
             List<PaymentCreditCard> paymentCreditCards = new List<PaymentCreditCard>();
             PaymentCreditCard paymentCreditCard = new PaymentCreditCard();
+            paymentCreditCard.CreditCard = 1;
             paymentCreditCard.CreditAcct = ConfigurationManager.AppSettings["CreditAcct"].ToString();
-            paymentCreditCard.CreditCardNumber = "";
-            paymentCreditCard.VoucherNum = "";
+            paymentCreditCard.CardValidUntil = ConfigurationManager.AppSettings["CardValidUntil"].ToString();
+            paymentCreditCard.CreditCardNumber = ConfigurationManager.AppSettings["CreditCardNumber"].ToString();
+            paymentCreditCard.VoucherNum = ConfigurationManager.AppSettings["VoucherNum"].ToString();
             paymentCreditCard.PaymentMethodCode = 1;
             paymentCreditCard.CreditSum = responseInvoice.DocTotal;
             paymentCreditCard.CreditCur = responseInvoice.DocCurrency;

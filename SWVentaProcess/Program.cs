@@ -14,12 +14,16 @@ namespace SWVentaProcess
         /// </summary>
         static void Main()
         {
+            /*
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new VentasProcess()
             };
             ServiceBase.Run(ServicesToRun);
+            */
+
+            new TestApp().ExecuteProcess();
         }
     }
 }

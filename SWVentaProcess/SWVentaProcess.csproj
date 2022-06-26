@@ -59,6 +59,7 @@
     <Compile Include="Models\DocumentModel\DocumentBatch.cs" />
     <Compile Include="Models\DocumentModel\DocumentDetail.cs" />
     <Compile Include="Models\ErrorSL.cs" />
+    <Compile Include="Models\Lote.cs" />
     <Compile Include="Models\OrderModel\Order.cs" />
     <Compile Include="Models\OrderModel\OrderDetail.cs" />
     <Compile Include="Models\PaymentModel\Payment.cs" />
@@ -73,6 +74,7 @@
     </Compile>
     <Compile Include="Services\contracts\IVentaService.cs" />
     <Compile Include="Services\VentaService.cs" />
+    <Compile Include="TestApp.cs" />
     <Compile Include="VentasProcess.cs">
       <SubType>Component</SubType>
     </Compile>

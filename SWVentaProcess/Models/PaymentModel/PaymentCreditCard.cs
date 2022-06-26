@@ -8,9 +8,10 @@ namespace SWVentaProcess.Models.PaymentModel
 {
     class PaymentCreditCard
     {
-        //public int CreditCard { get; set; }
+        public int CreditCard { get; set; }
         public string CreditAcct { get; set; }
         public string CreditCardNumber { get; set; }
+        public string CardValidUntil { get; set; }
         public string VoucherNum { get; set; }
         public int PaymentMethodCode { get; set; }
         public double CreditSum { get; set; }

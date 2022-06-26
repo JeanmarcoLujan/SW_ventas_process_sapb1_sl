@@ -52,16 +52,16 @@ namespace SWVentaProcess
                     string token = ventaService.Login();
 
                     //Obtener ordenes
-                    List<Order> orders = ventaService.getOrders(token);
+                    OrderDTO orders = ventaService.getOrders(token);
 
                     //Generar entregas, factura y pago
-                    foreach (var doc in orders)
+                    foreach (var doc in orders.value)
                     {
                         //create delivery
                         Response resDelivery = ventaService.createDelivery(token, DeliveryHelper.DeliveryGenerateTrama(doc));
 
                         //create invoice
-                        Response resInvoice = ventaService.createDelivery(token, InvoiceHelper.InvoiceGenerateTrama(doc, int.Parse(resDelivery.DocEntry)));
+                        Response resInvoice = ventaService.createInvoice(token, InvoiceHelper.InvoiceGenerateTrama(doc, int.Parse(resDelivery.DocEntry)));
 
                         //create payment
                         Response resPayment = ventaService.createPayment(token, PaymentHelper.PaymentGenerateTrama(doc, resInvoice));

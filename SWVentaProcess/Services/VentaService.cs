@@ -117,25 +117,34 @@ namespace SWVentaProcess.Services
             return documentResult;
         }
 
-        public List<Order> getOrders(string token)
+        public OrderDTO getOrders(string token)
         {
-            List<Order> documentResult = new List<Order>();
+            OrderDTO documentResult = new OrderDTO();
             try
             {
-                using (var streamReader = new StreamReader(SLData.GetInfo(token, "Orders(13584)").GetResponseStream()))
+                using (var streamReader = new StreamReader(SLData.GetInfo(token, "Orders?$filter=U_CALI_VTEX eq 'Y' AND DocumentStatus eq 'bost_Open' ").GetResponseStream()))
                 {
                     string result = streamReader.ReadToEnd();
-                    documentResult = JsonConvert.DeserializeObject<List<Order>>(result);
+                    
+                    documentResult = JsonConvert.DeserializeObject<OrderDTO>(result);
                 }
             }
             catch (WebException e)
             {
                 ErrorSL errorMessage = null;
-                documentResult = null;
+                errorMessage = JsonConvert.DeserializeObject<ErrorSL>(new StreamReader(e.Response.GetResponseStream()).ReadToEnd());
+
+                string sdf = errorMessage.error.message.value.ToString();
             }
 
 
             return documentResult;
+        }
+
+        public List<Lote> getLote(string itemCode, string whsCode)
+        {
+            string url = $"" + ConfigurationManager.AppSettings["ip_xs"].ToString() + "GetLote.xsjs?database=" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "&itemCode='" + itemCode + "'&whsCode='" + whsCode + "'";
+            return SLData.getInfoLote(url);
         }
     }
 }

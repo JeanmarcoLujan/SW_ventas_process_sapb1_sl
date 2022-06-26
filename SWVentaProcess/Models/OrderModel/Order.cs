@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SWVentaProcess.Models.OrderModel
 {
-    class Order
+    public class OrderDTO
+    {
+   
+        public string OdataMetadata { get; set; }
+        public virtual List<Order> value { get; set; }
+    }
+    public class Order
     {
         public string DocEntry { get; set; }
         public string DocDate { get; set; }

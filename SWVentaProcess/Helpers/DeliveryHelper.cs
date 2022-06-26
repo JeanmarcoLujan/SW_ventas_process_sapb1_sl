@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SWVentaProcess.Models;
 using SWVentaProcess.Models.OrderModel;
+using SWVentaProcess.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -50,7 +51,7 @@ namespace SWVentaProcess.Helpers
             {
                 DocumentDetail dt = new DocumentDetail();
                 dt.ItemCode = det.ItemCode;
-                dt.Quantity = det.Price;
+                dt.Quantity = det.Quantity;
                 dt.WarehouseCode = det.WarehouseCode;
                 dt.CostingCode = det.CostingCode;
                 dt.CostingCode2 = det.CostingCode2;
@@ -61,6 +62,24 @@ namespace SWVentaProcess.Helpers
                 dt.BaseType = 17;
                 dt.BaseEntry = docEntryBase;
                 dt.BaseLine = det.LineNum;
+             
+
+                List<Lote> batchs = new VentaService().getLote(det.ItemCode, det.WarehouseCode);
+                if (batchs.Count > 0)
+                {
+                    List<DocumentBatch> b = new List<DocumentBatch>();
+                    foreach (var item in batchs)
+                    {
+                        DocumentBatch deliveryBatch = new DocumentBatch();
+                        deliveryBatch.BatchNumber = item.BatchNum;
+                        deliveryBatch.Quantity = float.Parse(det.Quantity.ToString());
+                        deliveryBatch.BaseLineNumber = det.LineNum;
+                        b.Add(deliveryBatch);
+                    }
+                    dt.BatchNumbers = b;
+                }
+
+
 
                 documentDetails.Add(dt);
             }
