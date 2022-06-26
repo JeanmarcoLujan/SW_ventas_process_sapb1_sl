@@ -5,6 +5,7 @@ using SWVentaProcess.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -28,7 +29,7 @@ namespace SWVentaProcess
         {
             WriteToFile("Servicio para generar documentos de venta " + DateTime.Now);
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
-            timer.Interval = 5000; 
+            timer.Interval = int.Parse(ConfigurationManager.AppSettings["Interval"].ToString())*1000; 
             timer.Enabled = true;
         }
 
@@ -54,9 +55,11 @@ namespace SWVentaProcess
                     //Obtener ordenes
                     OrderDTO orders = ventaService.getOrders(token);
 
+
                     //Generar entregas, factura y pago
                     foreach (var doc in orders.value)
                     {
+                        
                         //create delivery
                         Response resDelivery = ventaService.createDelivery(token, DeliveryHelper.DeliveryGenerateTrama(doc));
 
@@ -66,14 +69,12 @@ namespace SWVentaProcess
                         //create payment
                         Response resPayment = ventaService.createPayment(token, PaymentHelper.PaymentGenerateTrama(doc, resInvoice));
 
+                        if(resDelivery.Registered == true && resInvoice.Registered == true && resPayment.Registered == true)
+                            WriteToFile(DateTime.Now + ": " + "Registro la entrega:" + resDelivery.DocEntry.ToString() + " factura:" + resInvoice.DocEntry.ToString() + " pago: " + resPayment.DocEntry.ToString() );
                     }
 
-                   
 
-
-
-
-                    WriteToFile(DateTime.Now + ": " + "ASDF");
+                    
                 }
                 finally
                 {
