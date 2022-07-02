@@ -22,7 +22,7 @@ namespace SWVentaProcess
         Timer timer = new Timer();
         public VentasProcess()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         protected override void OnStart(string[] args)

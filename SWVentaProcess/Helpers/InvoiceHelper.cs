@@ -44,7 +44,7 @@ namespace SWVentaProcess.Helpers
         private static List<DocumentDetail> InvoiceGenerateTramaDetail(List<OrderDetail> orderDetail, int docEntryBase)
         {
             List<DocumentDetail> documentDetails = new List<DocumentDetail>();
-
+            int cont = 0;
             foreach (var det in orderDetail)
             {
                 DocumentDetail dt = new DocumentDetail();
@@ -59,9 +59,10 @@ namespace SWVentaProcess.Helpers
                 dt.TaxCode = det.TaxCode;
                 dt.BaseType = 15;
                 dt.BaseEntry = docEntryBase;
-                dt.BaseLine = det.LineNum;
+                dt.BaseLine = cont; // det.LineNum;
 
                 documentDetails.Add(dt);
+                cont++;
             }
 
 

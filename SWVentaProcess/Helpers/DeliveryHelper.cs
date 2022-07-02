@@ -47,6 +47,7 @@ namespace SWVentaProcess.Helpers
         {
             List<DocumentDetail> documentDetails = new List<DocumentDetail>();
 
+            int cont = 0;
             foreach (var det in orderDetail)
             {
                 DocumentDetail dt = new DocumentDetail();
@@ -73,11 +74,12 @@ namespace SWVentaProcess.Helpers
                         DocumentBatch deliveryBatch = new DocumentBatch();
                         deliveryBatch.BatchNumber = item.BatchNum;
                         deliveryBatch.Quantity = float.Parse(det.Quantity.ToString());
-                        deliveryBatch.BaseLineNumber = det.LineNum;
+                        deliveryBatch.BaseLineNumber = cont;
                         b.Add(deliveryBatch);
                     }
                     dt.BatchNumbers = b;
                 }
+                cont++;
 
 
 

@@ -55,7 +55,7 @@ namespace SWVentaProcess.Helpers
             paymentCreditCard.PaymentMethodCode = 1;
             paymentCreditCard.CreditSum = responseInvoice.DocTotal;
             paymentCreditCard.CreditCur = responseInvoice.DocCurrency;
-            paymentCreditCard.CreditRate = double.Parse(responseInvoice.DocRate);
+            paymentCreditCard.CreditRate = responseInvoice.DocRate == null ? 0: double.Parse(responseInvoice.DocRate);
             paymentCreditCard.NumOfCreditPayments = 1;
             paymentCreditCard.CreditType = "cr_Regular";
 
